@@ -7,7 +7,7 @@ from streamlit_folium import st_folium
 from streamlit.components.v1 import html
 
 
-st.set_page_config(layout="centered", page_title="Wardriver Viewer", page_icon="📡 ")
+st.set_page_config(layout="centered", page_title="Wardriver Viewer", page_icon="📡")
 st.title("📡 Wardriver Viewer")
 
 # ----------------------------
@@ -144,4 +144,5 @@ if uploaded_file:
         fmap = make_map(df, auth_filter, type_filter, radius_from_rssi)
         #st_folium(fmap, width=900, height=600)
         html(fullscreen_html(fmap._repr_html_()), height=600, scrolling=False)
+
 
