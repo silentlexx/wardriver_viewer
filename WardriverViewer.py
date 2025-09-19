@@ -128,10 +128,12 @@ if uploaded_file:
 
     df = pd.read_csv(uploaded_file, on_bad_lines="skip", header=1, delimiter=",")
 
-    auth_filter = st.selectbox("WiFi Authentication filter", ["ALL", "OPEN", "WPA", "WPA2", "WEP"])
     type_filter = st.selectbox("Device type filter", ["ALL", "WIFI", "BLE"])
-
-
+    if type_filter != "BLE":
+        auth_filter = st.selectbox("WiFi Authentication filter", ["ALL", "OPEN", "WPA", "WPA2", "WEP"])
+    else:
+        auth_filter = "ALL"
+    
     df = filtre_data(df, auth_filter, type_filter)
 
     tab1, tab2 = st.tabs(["📋 Table", "🗺️ Map"])
@@ -144,5 +146,6 @@ if uploaded_file:
         fmap = make_map(df, auth_filter, type_filter, radius_from_rssi)
         #st_folium(fmap, width=900, height=600)
         html(fullscreen_html(fmap._repr_html_()), height=600, scrolling=False)
+
 
 
