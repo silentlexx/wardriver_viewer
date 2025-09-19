@@ -61,7 +61,7 @@ def fullscreen_html(html_code):
 def filtre_data(df, auth_filter, type_filter):
 
     if auth_filter != "ALL" and type_filter != "BLE":
-        df = df[df["AuthMode"] == f"[{auth_filter}]"]
+        df = df[df["AuthMode"] == auth_filter]
 
     if type_filter != "ALL":
         df = df[df["Type"] == type_filter]
@@ -146,6 +146,7 @@ if uploaded_file:
         fmap = make_map(df, auth_filter, type_filter, radius_from_rssi)
         #st_folium(fmap, width=900, height=600)
         html(fullscreen_html(fmap._repr_html_()), height=600, scrolling=False)
+
 
 
 
